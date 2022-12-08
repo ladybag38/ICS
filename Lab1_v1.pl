@@ -11,16 +11,22 @@
 • Опpеделить владельцев животных небелого цвета*/
 
 %вид животного
-animal(dog).
-animal(cat).
-animal(horse).
+%animal(dog).
+%animal(cat).
+%animal(horse).
 
 %кличка животного
-names(flash, dog).
-names(rover, dog).
-names(butci, cat).
-names(star, horse).
 
+animal(flash, dog).
+animal(rover, dog).
+animal(butci, cat).
+animal(star, horse).
+
+names(X, homeanimal):-
+     animal(X, cat);
+     animal(X, dog).
+
+     
 %масть животного
 color(flash, black).
 color(rover, orange).
@@ -32,23 +38,21 @@ human(tom).
 human(keyt).
 human(jack).
 
-%какие животные являются домашними
-homeAnimal(names, Y):-
-    Y=dog; Y=cat.
+
 
 %владельцем какого животного(X) может считаться Том?
 owner(tom, X):-
      X=dog,
-     color(X, orange); color(X, brown); color(X, white).
+     color(X, orange); color(X, brown); color(X, white). 
 
 %владельцем какого животного(X) может считаться Кейт?
 owner(keyt, X):-
-    names(X, horse);
+    animal(X, horse);
     color(X, black).
 
    							 %ЗАПРОСЫ%
     /* Pовеp рыжая?
-     * ? - color(rover, orange)
+     * ? color(rover, orange)- 
      * Опpеделить клички всех собак.
      * ? - names(X, dog)
      * Опpеделить владельцев чего-либо.
