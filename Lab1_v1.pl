@@ -1,3 +1,4 @@
+
 /*Флэш — собака. Pовеp — собака. Бутси — кошка. Стаp —
 лошадь. Флэш чеpная. Бутси коpичневая. Pевеp pыжая. Стаp
 белая. Домашнее животное — собака или кошка. Живот-
@@ -10,57 +11,53 @@
 • Опpеделить владельцев чего-либо.
 • Опpеделить владельцев животных небелого цвета*/
 
-%вид животного
-%animal(dog).
-%animal(cat).
-%animal(horse).
 
 %кличка животного
 
-animal(flash, dog).
-animal(rover, dog).
-animal(butci, cat).
-animal(star, horse).
+dog(flash).
+dog(rover).
+cat(butci).
+horse(star).
 
-names(X, homeanimal):-
-     animal(X, cat);
-     animal(X, dog).
-
-     
 %масть животного
 color(flash, black).
 color(rover, orange).
 color(butci, brown).
 color(star, white).
 
+%домашнее животное это
+pet(X):-
+     dog(X); cat(X).
+
+%животное это
+animal(X):-
+    pet(X) ; horse(X).
+
 %имя человека
 human(tom).
 human(keyt).
-human(jack).
-
-
 
 %владельцем какого животного(X) может считаться Том?
 owner(tom, X):-
-     X=dog,
-     color(X, orange); color(X, brown); color(X, white). 
+     dog(X),
+     \+ color(X, black). 
 
-%владельцем какого животного(X) может считаться Кейт?
-owner(keyt, X):-
-    animal(X, horse);
-    color(X, black).
+%владельцем какого животного(Y) может считаться Кейт?
+owner(keyt, Y):-
+    horse(Y);
+    color(Y, black),
+    color(Y, black).
 
    							 %ЗАПРОСЫ%
     /* Pовеp рыжая?
      * ? color(rover, orange)- 
      * Опpеделить клички всех собак.
-     * ? - names(X, dog)
+     * ? - dog(X)
      * Опpеделить владельцев чего-либо.
-     * ? - owner(WHO, X)
+     * ? - owner(X, Y).
      * Опpеделить владельцев животных небелого цвета
-     * ?-color(Y, orange); color(Y, brown); color(Y, black), human(X), owner(X, Y)
+     * ?- animal(X), owner(Y, X), \+color(X, white).
     */
-
 
 
 
